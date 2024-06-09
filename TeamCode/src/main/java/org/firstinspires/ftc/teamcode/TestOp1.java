@@ -16,6 +16,21 @@ public class TestOp1 extends LinearOpMode {
      */
     @Override
     public void runOpMode() throws InterruptedException {
-        
+        DcMotor leftMotor = hardwareMap.dcMotor.get("leftMotor");
+        DcMotor rightMotor = hardwareMap.dcMotor.get("rightMotor") ;
+        leftMotor.setDirection(DcMotor.Direction.REVERSE) ;
+
+        waitForStart() ;
+
+        while ( opModeIsActive() ){
+            double y = -gamepad1.left_stick_y ;
+            double rx = gamepad1.right_stick_x ;
+            double max = Math.max(Math.max(y) + Math.max(rx) , 1 ) ;
+            double leftPower = ( y + rx ) / max ;
+            double rightPower = ( y - rx ) / max ;
+
+            leftMotor.setPower(leftPower) ;
+            rightMotor.setPower(rightPower) ;
+            
     }
 }
