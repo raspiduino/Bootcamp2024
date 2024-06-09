@@ -25,7 +25,7 @@ public class TestOp1 extends LinearOpMode {
         while ( opModeIsActive() ){
             double y = -gamepad1.left_stick_y ;
             double rx = gamepad1.right_stick_x ;
-            double max = Math.max(Math.max(y) + Math.max(rx) , 1 ) ;
+            double max = Math.max(Math.abs(y) + Math.abs(rx) , 1 ) ;
             double leftPower = ( y + rx ) / max ;
             double rightPower = ( y - rx ) / max ;
 
