@@ -72,13 +72,13 @@ public class TestOp1 extends LinearOpMode {
             rightMotor.setPower(ry);
 
             // Hang button up
-            if (trigger(gamepad1.left_trigger)) {
+            if (gamepad1.left_bumper) {
                 hangMotor.setPower(1);
                 telemetry.addData("Hang", "up");
             }
 
             // Hang motor down
-            else if (trigger(gamepad1.right_trigger)) {
+            else if (gamepad1.right_bumper) {
                 hangMotor.setPower(-1);
                 telemetry.addData("Hang", "down");
             }
