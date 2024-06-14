@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 public class TestOp1 extends LinearOpMode {
     // Sensitivity value
     private final double SENSE = 0.05;
+    private final double TRIGG = 0.3;
 
     /**
      * Quick function for sensitivity control
@@ -13,7 +14,16 @@ public class TestOp1 extends LinearOpMode {
      * @return input, if it's >= SENSE. Else 0.
      */
     private double sense(double input) {
-        return (input >= SENSE) ? input : 0;
+        return (Math.abs(input) >= SENSE) ? input : 0;
+    }
+
+    /**
+     * Quick function for detecting analog button state
+     * @param input analog button value
+     * @return bool, true if input >= TRIGG
+     */
+    private boolean trigger(float input) {
+        return (input >= TRIGG);
     }
 
     /**
@@ -62,13 +72,13 @@ public class TestOp1 extends LinearOpMode {
             rightMotor.setPower(ry);
 
             // Hang button up
-            if (gamepad1.triangle) {
+            if (trigger(gamepad1.left_trigger)) {
                 hangMotor.setPower(1);
                 telemetry.addData("Hang", "up");
             }
 
             // Hang motor down
-            else if (gamepad1.cross) {
+            else if (trigger(gamepad1.right_trigger)) {
                 hangMotor.setPower(-1);
                 telemetry.addData("Hang", "down");
             }
